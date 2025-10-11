@@ -1,0 +1,22 @@
+.orders {
+    width: 100vw;
+    height: 100vh;
+
+    background-color: #FFCAD4;
+}
+
+.orders-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.orders-box h1 {
+    margin-top: 2rem;
+    color: #9D8189;
+}
+
+.orders-box p {
+    color: #9D8189;
+}

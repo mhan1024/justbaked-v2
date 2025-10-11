@@ -1,0 +1,22 @@
+.home-div {
+    width: 100vw;
+    height: 100vh;
+
+    background-color: #FFE5D9;
+}
+
+.img-container {
+    height: 100%;
+    width: 100%;
+
+    background-color: #F4ACB7;
+}
+
+.home-banner {
+    height: 100%;
+    width: 100%;
+    display: block;
+    object-fit: contain;
+    
+}
+

@@ -1,0 +1,17 @@
+.custom-navbar {
+    background-color: #FFE5D9;
+}
+  
+.custom-navbar .navbar-brand h1, .custom-navbar .nav-link {
+    color: #9D8189;
+}
+
+.custom-navbar .nav-link:hover {
+    background-color: #D8E2DC;
+}
+
+.bg-secondary {
+    background-color: #9D8189 !important;
+    color: white;
+    margin-left: 0.25rem;
+  }
