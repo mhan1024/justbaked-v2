@@ -8,6 +8,9 @@ export const CartProvider = ({ children }) => {
     const [ cartTotal, setCartTotal ] = useState(0.0);
     const [ totalCartItems, setTotalCartItems ] = useState(0);
 
+    const apiUrl = import.meta.env.VITE_API_URL;
+
+
     const addToCart = (item) => {
         const existingItem = cartItems.find((cartItem) => cartItem.id === item.id);
 
@@ -49,7 +52,7 @@ export const CartProvider = ({ children }) => {
         for (const item of cartItems) {
 
             try {
-                const response = await fetch(`http://localhost:8080/api/order-items`, {
+                const response = await fetch(`${apiUrl}/api/order-items`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"

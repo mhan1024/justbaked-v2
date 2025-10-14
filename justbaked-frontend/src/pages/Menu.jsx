@@ -11,17 +11,20 @@ function Menu() {
     const [ imageUrls, setImageUrls ] = useState({});
     const { addToCart } = useCart();
 
+    const apiUrl = import.meta.env.VITE_API_URL;
+
+
     useEffect(() => {
         const fetchItems = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/api/items`);
+                const response = await fetch(`${apiUrl}/api/items`);
                 const data = await response.json();
                 setItems(data);
 
                 const images = await Promise.all(
                     data.map(async item => {
                         if (!item.imageUrl) return [item.id, null];
-                        const response = await fetch(`http://localhost:8080/api/images/${item.imageUrl}`);
+                        const response = await fetch(`${apiUrl}/api/images/${item.imageUrl}`);
 
                         if (!response.ok) return [item.id, null];
 

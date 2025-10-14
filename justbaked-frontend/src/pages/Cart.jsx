@@ -12,8 +12,10 @@ function Cart() {
     const [ showCheckoutModal, setShowCheckoutModal ] = useState(false);
     const [ showToast, setShowToast ] = useState(false);
 
+    const apiUrl = import.meta.env.VITE_API_URL;
+
     const handleCheckout = async (e) => {
-        const response = await fetch(`http://localhost:8080/api/customer-orders`, {
+        const response = await fetch(`${apiUrl}/api/customer-orders`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

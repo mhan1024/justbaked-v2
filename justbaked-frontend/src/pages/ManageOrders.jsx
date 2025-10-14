@@ -9,16 +9,19 @@ function ManageOrders() {
     const [ statusUpdate, setStatusUpdate ] = useState({});
     const [ itemStatus, setItemStatus ] = useState({});
 
+    const apiUrl = import.meta.env.VITE_API_URL;
+
+
     useEffect(() => {
         const fetchAllOrders = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/api/customer-orders`);
+                const response = await fetch(`${apiUrl}/api/customer-orders`);
                 const data = await response.json();
 
                 setOrders(data);
 
                 data.forEach(async (order) => {
-                    const orderRes = await fetch(`http://localhost:8080/api/order-items/order-id/${order.id}`);
+                    const orderRes = await fetch(`${apiUrl}/api/order-items/order-id/${order.id}`);
                     const orderData = await orderRes.json();
 
                     setOrderItems(prev => ({...prev, [order.id]: orderData }));
@@ -54,7 +57,7 @@ function ManageOrders() {
         Object.entries(statusUpdate).forEach(async ([id, stat]) => {
 
             try {
-                await fetch(`http://localhost:8080/api/customer-orders/${id}`, {
+                await fetch(`${apiUrl}/api/customer-orders/${id}`, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
@@ -74,7 +77,7 @@ function ManageOrders() {
     const handleSaveItemStatus = () => {
         Object.entries(itemStatus).forEach(async ([id, itemStat]) => {
             try {
-                await fetch(`http://localhost:8080/api/order-items/cart-item-id/${id}`, {
+                await fetch(`${apiUrl}/api/order-items/cart-item-id/${id}`, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
@@ -92,18 +95,18 @@ function ManageOrders() {
 
         for (const order of orders) {
 
-            const orderRes = await fetch(`http://localhost:8080/api/order-items/order-id/${order.id}`);
+            const orderRes = await fetch(`${apiUrl}/api/order-items/order-id/${order.id}`);
             const orderData = await orderRes.json();
 
             orderData.forEach(async (orderItem) => {
-                const itemRes = await fetch(`http://localhost:8080/api/order-items/${orderItem.id}`, {
+                const itemRes = await fetch(`${apiUrl}/api/order-items/${orderItem.id}`, {
                     method: "DELETE"
                 });
 
                 if (itemRes.ok) console.log("Successfully removed items in order");
             });
 
-            const deleteRes = await fetch(`http://localhost:8080/api/customer-orders/${order.id}`, {
+            const deleteRes = await fetch(`${apiUrl}/api/customer-orders/${order.id}`, {
                 method: "DELETE"
             });
 

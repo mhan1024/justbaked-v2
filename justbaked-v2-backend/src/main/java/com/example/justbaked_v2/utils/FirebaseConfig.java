@@ -6,35 +6,30 @@ import com.google.firebase.FirebaseOptions;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
-import java.io.IOException;
-import java.io.InputStream;
+
+import java.io.FileInputStream;
 
 @Configuration
 public class FirebaseConfig {
 	
 	@PostConstruct
-    public void initialize() throws IOException {
-		try {
-            // Load from resources (inside src/main/resources)
-            InputStream serviceAccount =
-                    getClass().getClassLoader().getResourceAsStream("serviceAccountKey.json");
-
-            if (serviceAccount == null) {
-                throw new IllegalStateException("Could not find serviceAccountKey.json in resources folder");
+    public void initialize() {
+        try {
+            String firebaseCreds = System.getenv("FIREBASE_CONFIG");
+            if (firebaseCreds == null) {
+                throw new IllegalStateException("FIREBASE_CONFIG not set");
             }
 
             FirebaseOptions options = FirebaseOptions.builder()
-                    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                    .setCredentials(GoogleCredentials.fromStream(new FileInputStream(firebaseCreds)))
                     .build();
 
-            if (FirebaseApp.getApps().isEmpty()) {
-                FirebaseApp.initializeApp(options);
-                System.out.println("✅ Firebase initialized successfully!");
-            }
+            FirebaseApp.initializeApp(options);
+            System.out.println("✅ Firebase initialized successfully");
         } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("Failed to initialize Firebase", e);
+            throw new RuntimeException("❌ Failed to initialize Firebase", e);
         }
-    }
+        
+	}
 
 }

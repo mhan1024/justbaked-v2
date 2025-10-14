@@ -14,6 +14,9 @@ function SignUp() {
 
     const navigate = useNavigate();
 
+    const apiUrl = import.meta.env.VITE_API_URL;
+
+
     const handleSignUp = async (e) => {
         e.preventDefault();
         try {
@@ -33,7 +36,7 @@ function SignUp() {
     };
 
     const sendIdTokenToBackEnd = async (idToken) => {
-        const response = await fetch(`http://localhost:8080/api/customers/register`, {
+        const response = await fetch(`${apiUrl}/api/customers/register`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

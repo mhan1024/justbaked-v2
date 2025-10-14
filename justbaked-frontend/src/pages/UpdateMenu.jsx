@@ -15,10 +15,13 @@ function UpdateMenu() {
 
     const fileInputRef = useRef();
 
+    const apiUrl = import.meta.env.VITE_API_URL;
+
+
     useEffect(() => {
         const fetchItems = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/api/items`);
+                const response = await fetch(`${apiUrl}/api/items`);
                 const data = await response.json();
                 setItems(data);
 
@@ -42,7 +45,7 @@ function UpdateMenu() {
                 const formData = new FormData();
                 formData.append("image", file);
 
-                const uploadResponse = await fetch(`http://localhost:8080/api/images`, {
+                const uploadResponse = await fetch(`${apiUrl}/api/images`, {
                     method: "POST",
                     body: formData
                 });
@@ -55,7 +58,7 @@ function UpdateMenu() {
                 // fetchImage(uploadedImageName);
             }
 
-            const response = await fetch(`http://localhost:8080/api/items`, {
+            const response = await fetch(`${apiUrl}/api/items`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -73,7 +76,7 @@ function UpdateMenu() {
             
             if (!response.ok) throw new Error("Failed to save dessert");
 
-            const updatedRes = await fetch(`http://localhost:8080/api/items`);
+            const updatedRes = await fetch(`${apiUrl}/api/items`);
             const data = await updatedRes.json();
             setItems(data);
 
@@ -96,13 +99,13 @@ function UpdateMenu() {
 
         selectedItems.forEach(async (id) => {
             try {
-                const response = await fetch(`http://localhost:8080/api/items/${id}`, {
+                const response = await fetch(`${apiUrl}/api/items/${id}`, {
                     method: "DELETE"
                 });
 
                 if (response.ok) console.log("Successfully removed");
 
-                const updatedRes = await fetch(`http://localhost:8080/api/items`);
+                const updatedRes = await fetch(`${apiUrl}/api/items`);
                 const data = await updatedRes.json();
                 setItems(data);
 
@@ -115,7 +118,7 @@ function UpdateMenu() {
 
         selectedImages.forEach(async (imageUrl) => {
             try {
-                const imageResponse = await fetch(`http://localhost:8080/api/images/${imageUrl}`, {
+                const imageResponse = await fetch(`${apiUrl}/api/images/${imageUrl}`, {
                     method: "DELETE"
                 });
 

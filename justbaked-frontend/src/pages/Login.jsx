@@ -14,6 +14,8 @@ function Login() {
 
     const navigate = useNavigate();
 
+    const apiUrl = import.meta.env.VITE_API_URL;
+
     const handleLogin = async (e) => {
         e.preventDefault();
 
@@ -68,7 +70,7 @@ function Login() {
     }
 
     const sendIdTokenToBackEnd = async (idToken) => {
-        const response = await fetch(`http://localhost:8080/api/customers/protected`, {
+        const response = await fetch(`${apiUrl}/api/customers/protected`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${idToken}`

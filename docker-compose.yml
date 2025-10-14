@@ -1,0 +1,58 @@
+version: "3.9"
+
+services:
+  db:
+      image: mysql:8.0.29
+      container_name: justbaked-db
+      environment:
+        - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+        - MYSQL_DATABASE=justbaked_database
+      networks:
+        - justbaked-net
+      healthcheck:
+        test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+        interval: 5s
+        timeout: 5s
+        retries: 5
+
+
+  backend:
+    image: mhan1024/justbaked-backend:latest
+    build:
+      context: ./justbaked-v2-backend
+      dockerfile: Dockerfile
+    container_name: justbaked-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - FIREBASE_CONFIG=/app/serviceAccountKey.json
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/justbaked_database
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+    volumes:
+      - ./justbaked-v2-backend/src/main/resources/serviceAccountKey.json:/app/serviceAccountKey.json:ro
+    networks:
+      - justbaked-net
+    depends_on:
+      db:
+        condition: service_healthy
+
+
+  frontend:
+    build:
+      context: ./justbaked-frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: http://localhost:8080
+    container_name: justbaked-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - justbaked-net
+
+networks:
+  justbaked-net:
+    driver: bridge

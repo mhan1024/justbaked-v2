@@ -10,16 +10,18 @@ function Account() {
     const [ orderItems, setOrderItems ] = useState({});
     const { uid, email, displayName, photoUrl, handleLogout } = useAuth();
 
+    const apiUrl = import.meta.env.VITE_API_URL;
+
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/api/customer-orders/customer/${uid}`);
+                const response = await fetch(`${apiUrl}/api/customer-orders/customer/${uid}`);
                 const data = await response.json();
 
                 setOrders(data);
 
                 data.forEach(async (order) => {
-                    const orderRes = await fetch(`http://localhost:8080/api/order-items/order-id/${order.id}`);
+                    const orderRes = await fetch(`${apiUrl}/api/order-items/order-id/${order.id}`);
                     const orderData = await orderRes.json();
 
                     setOrderItems(prev => ({...prev, [order.id]: orderData }));
