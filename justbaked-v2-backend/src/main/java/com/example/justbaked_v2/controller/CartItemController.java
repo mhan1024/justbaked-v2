@@ -2,7 +2,9 @@ package com.example.justbaked_v2.controller;
 
 import org.springframework.web.bind.annotation.*;
 import com.example.justbaked_v2.model.*;
-import com.example.justbaked_v2.service.*;
+import com.example.justbaked_v2.service.CartItemService;
+import com.example.justbaked_v2.service.CustomerOrderService;
+
 import java.util.*;
 
 @CrossOrigin(origins = "http://localhost:3000")
