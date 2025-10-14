@@ -1,6 +1,6 @@
 import NavigationBar from "./NavigationBar";
-import { useCart } from "./CartContext";
-import { useAuth } from "./AuthorizedUser"; 
+import { useCart } from "../CartContext";
+import { useAuth } from "../AuthorizedUser"; 
 import { useState } from "react";
 import { Button, Modal, Toast } from "react-bootstrap";
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Card } from "react-bootstrap";
 
 import NavigationBar from "./NavigationBar";
-import { useCart } from "./CartContext";
+import { useCart } from "../CartContext";
 
 import "./CSS/Menu.css";
 

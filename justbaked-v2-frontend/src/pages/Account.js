@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 
 import NavigationBar from "./NavigationBar";
-import { useAuth } from "./AuthorizedUser";
-import { SearchProvider, SearchOrders } from "./Search";
-import Login from "./Login";
+import { useAuth } from "../AuthorizedUser";
+import { SearchProvider, SearchOrders } from "../Search";
+import Login from "../Login";
 
 import "./CSS/Account.css";
 

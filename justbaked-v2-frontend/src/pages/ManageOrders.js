@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import NavigationBar from "./NavigationBar";
-import { SearchProvider, SearchOrders } from "./Search";
+import { SearchProvider, SearchOrders } from "../Search";
 
 import "./CSS/ManageOrders.css";
 
