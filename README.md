@@ -28,8 +28,17 @@
 <p>To run the JustBaked app locally using Docker, follow these steps:</p>
 <ol>
   <li>Clone the repo: git clone https://github.com/mhan1024/justbaked-v2.git</li>
-  <li>Go to project directory: cd justbaked</li>
+  <li>Go to project directory: cd justbaked-v2</li>
   <li>Set up and update environment variables by copying the example .env file: cp .env.example .env</li>
+  <li>
+    Since this project uses Firebase for authentication and other services, you'll need to provide your own `serviceAccountKey.json` file. <br>
+    💡 Tip: See the included serviceAccountKey.example.json file for guidance on the required format. Make sure your real serviceAccountKey.json follows the same structure.
+    <ol>
+      <li>Go to your Firebase project settings → Service Accounts → Generate new private key</li>
+      <li>Download the JSON file and rename it to `serviceAccountKey.json`.</li>
+      <li>Place the file in justbaked-v2-backend/src/main/resources/</li>
+    </ol>
+  </li>
   <li>Start the application using Docker Compose: docker-compose up --build</li>
   <li>
     Once the containers are running, access the app at: <a href="http://localhost:3000">http://localhost:3000</a>
