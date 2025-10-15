@@ -27,7 +27,7 @@
 <h3>🚀 Getting Started</h3>
 <p>To run the JustBaked app locally using Docker, follow these steps:</p>
 <ol>
-  <li>Clone the repo: git clone https://github.com/yourusername/justbaked.git</li>
+  <li>Clone the repo: git clone https://github.com/mhan1024/justbaked-v2.git</li>
   <li>Go to project directory: cd justbaked</li>
   <li>Set up and update environment variables by copying the example .env file: cp .env.example .env</li>
   <li>Start the application using Docker Compose: docker-compose up --build</li>
