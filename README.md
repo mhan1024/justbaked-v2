@@ -24,12 +24,12 @@
   <li>Authentication: Firebase Authentication</li>
 </ul>
 
-<h3>🚀 Getting Started</h3>
+<h3>🚀 Getting Started (works for macOS arm64 ONLY)</h3>
 <p>To run the JustBaked app locally using Docker, follow these steps:</p>
 <ol>
   <li>Clone the repo: git clone https://github.com/mhan1024/justbaked-v2.git</li>
   <li>Go to project directory: cd justbaked-v2</li>
-  <li>Set up and update environment variables by copying the example .env file: cp .env.example .env</li>
+  <li>Set up and update environment variables (in both root directory and justbaked-v2-backend) by copying the example .env file: cp .env.example .env</li>
   <li>
     Since this project uses Firebase for authentication and other services, you'll need to provide your own `serviceAccountKey.json` file. <br>
     💡 Tip: See the included serviceAccountKey.example.json file for guidance on the required format. Make sure your real serviceAccountKey.json follows the same structure.
@@ -40,6 +40,12 @@
     </ol>
   </li>
   <li>Start the application using Docker Compose: docker-compose up --build</li>
+  <li>
+    If you encounter an error like: <br>
+    ❌ Failed to initialize Firebase <br>
+    Caused by: java.io.IOException: Resource deadlock avoided <br>
+    Run this command in your terminal: chmod 644 ./justbaked-v2-backend/src/main/resources/serviceAccountKey.json
+  </li>
   <li>
     Once the containers are running, access the app at: <a href="http://localhost:3000">http://localhost:3000</a>
   </li>
